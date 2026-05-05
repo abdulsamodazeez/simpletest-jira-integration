@@ -168,17 +168,19 @@ def render_jira_sidebar() -> None:
 
 
 def _connection_status_banner() -> None:
-    """One-line status under the hero (live JIRA only)."""
-    src = "sidebar" if st.session_state.get("_jira_sidebar_applied") else ".env"
+    """Status strip at the top of the main area."""
     if jira_client.credentials_configured():
         st.success(
-            f"**JIRA ready** (via **{src}**) — `{jira_client.base_url()}`",
+            "**Connected to JIRA successfully.** "
+            f"Site: `{jira_client.base_url()}`",
             icon="✅",
         )
     else:
         st.warning(
-            "**JIRA not configured** — use the sidebar (**Apply connection**) or "
-            "set `JIRA_BASE_URL`, `JIRA_EMAIL`, `JIRA_API_TOKEN` in `.env`.",
+            "**Not connected to JIRA yet.** "
+            "Enter your site URL, email, and API token in the sidebar, then "
+            "**Apply connection** — or set `JIRA_BASE_URL`, `JIRA_EMAIL`, and "
+            "`JIRA_API_TOKEN` in `.env`.",
             icon="⚠️",
         )
 
