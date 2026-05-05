@@ -1,0 +1,10 @@
+# SimpleTest-aligned Streamlit theme (matches simpletest.ai-style indigo / slate palette).
+[theme]
+primaryColor = "#6366f1"
+backgroundColor = "#f4f7fb"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#0f172a"
+font = "sans serif"
+
+[client]
+toolbarMode = "minimal"
