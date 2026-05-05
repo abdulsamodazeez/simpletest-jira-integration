@@ -8,8 +8,8 @@ Two main areas:
    pull/assertion flow without rebuilding the form (handy for demos and
    regression checks). This is not mock data: each **Run** still calls JIRA.
 
-Credentials: **sidebar** (*Apply connection*), **`.env`**, or **`st.secrets`**
-(on Streamlit Community Cloud). See ``jira_client.configure_runtime``.
+Credentials: sidebar form, process environment, or ``st.secrets`` — see
+``jira_client.configure_runtime``.
 """
 
 from __future__ import annotations
@@ -104,9 +104,8 @@ def render_jira_sidebar() -> None:
     """Live JIRA URL / email / token — optional override of ``.env``."""
     st.sidebar.markdown("#### JIRA connection")
     st.sidebar.caption(
-        "Enter your **JIRA Cloud** site URL, account email, and API token, then "
-        "**Apply connection**. Fields can be pre-filled from **App secrets** "
-        "(Streamlit Cloud) or a local **`.env`** file next to the app."
+        "Enter your **JIRA Cloud** site URL, Atlassian account email, and API "
+        "token, then **Apply connection**."
     )
     with st.sidebar.form("jira_credentials_form"):
         st.text_input(
