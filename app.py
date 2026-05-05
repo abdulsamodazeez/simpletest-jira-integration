@@ -9,11 +9,7 @@ Two main areas:
    regression checks). This is not mock data: each **Run** still calls JIRA.
 
 Credentials: **sidebar** (*Apply connection*), **`.env`**, or **`st.secrets`**
-(on [Streamlit Community Cloud](https://streamlit.io/cloud)). See
-``jira_client.configure_runtime``.
-
-Visual styling matches SimpleTest (simpletest.ai) via ``branding.py`` and
-``.streamlit/config.toml``.
+(on Streamlit Community Cloud). See ``jira_client.configure_runtime``.
 """
 
 from __future__ import annotations
@@ -27,7 +23,6 @@ import streamlit as st
 from dotenv import load_dotenv
 
 import jira_client
-from branding import inject_theme_css, render_footer, render_hero
 from objects import CATALOG, list_object_names
 from test_runner import (
     TestCaseRun,
@@ -38,7 +33,7 @@ from test_runner import (
 )
 
 st.set_page_config(
-    page_title="SimpleTest · JIRA lab",
+    page_title="JIRA lab",
     page_icon="🔍",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -377,12 +372,10 @@ def render_library_tab() -> None:
 
 
 def main() -> None:
-    inject_theme_css()
     _seed_jira_sidebar_defaults_once()
     _bootstrap_sidebar_applied_once()
     render_jira_sidebar()
     _sync_jira_runtime_from_session()
-    render_hero()
     _connection_status_banner()
 
     tab_build, tab_lib = st.tabs(["Build & Run", "Library"])
@@ -392,8 +385,6 @@ def main() -> None:
     with tab_lib:
         with st.container(border=True):
             render_library_tab()
-
-    render_footer()
 
 
 if __name__ == "__main__":
