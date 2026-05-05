@@ -26,7 +26,7 @@ git commit -m "Add SimpleTest JIRA lab Streamlit app"
 Create an empty repo on GitHub, then:
 
 ```bash
-git remote add origin https://github.com/<you>/<repo>.git
+git remote add origin https://github.com/abdulsamodazeez/simpletest-jira-integration.git
 git branch -M main
 git push -u origin main
 ```
