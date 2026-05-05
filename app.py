@@ -16,7 +16,14 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 from typing import Any
+
+_APP_DIR = Path(__file__).resolve().parent
+
+
+def _env_file_present() -> bool:
+    return (_APP_DIR / ".env").is_file()
 
 import pandas as pd
 import streamlit as st
@@ -98,9 +105,8 @@ def render_jira_sidebar() -> None:
     st.sidebar.markdown("#### JIRA connection")
     st.sidebar.caption(
         "Enter your **JIRA Cloud** site URL, account email, and API token, then "
-        "**Apply connection**. On your laptop, values can come from `.env`; on "
-        "**Streamlit Community Cloud**, set the same keys under *App secrets* "
-        "(they load into `st.secrets` and pre-fill here)."
+        "**Apply connection**. Fields can be pre-filled from **App secrets** "
+        "(Streamlit Cloud) or a local **`.env`** file next to the app."
     )
     with st.sidebar.form("jira_credentials_form"):
         st.text_input(
@@ -130,31 +136,33 @@ def render_jira_sidebar() -> None:
             st.session_state.pop("_sidebar_whoami", None)
             st.sidebar.success("Credentials saved for this session.")
 
-    c1, c2 = st.sidebar.columns(2)
-    with c1:
-        if st.button("Clear override", key="jira_btn_clear_override"):
-            st.session_state["_jira_sidebar_applied"] = False
-            st.session_state.pop("_sidebar_whoami", None)
-            jira_client.clear_runtime_configuration()
-            st.rerun()
-    with c2:
-        if st.button("Reload .env", key="jira_btn_reload_env"):
-            load_dotenv(override=True)
-            st.session_state["jira_url"] = _read_jira_setting("JIRA_BASE_URL")
-            st.session_state["jira_email"] = _read_jira_setting("JIRA_EMAIL")
-            st.session_state["jira_token"] = _read_jira_setting("JIRA_API_TOKEN")
-            st.session_state["_jira_sidebar_applied"] = False
-            st.session_state.pop("_sidebar_whoami", None)
-            jira_client.clear_runtime_configuration()
-            st.rerun()
-
-    if st.button("Test connection", key="jira_btn_test_conn"):
-        st.session_state["_sidebar_whoami"] = jira_client.whoami()
-
-    if st.session_state.get("_jira_sidebar_applied"):
-        st.sidebar.caption("**Credentials:** sidebar override active")
+    if _env_file_present():
+        c1, c2 = st.sidebar.columns(2)
+        with c1:
+            if st.button("Clear override", key="jira_btn_clear_override"):
+                st.session_state["_jira_sidebar_applied"] = False
+                st.session_state.pop("_sidebar_whoami", None)
+                jira_client.clear_runtime_configuration()
+                st.rerun()
+        with c2:
+            if st.button("Reload .env", key="jira_btn_reload_env"):
+                load_dotenv(override=True)
+                st.session_state["jira_url"] = _read_jira_setting("JIRA_BASE_URL")
+                st.session_state["jira_email"] = _read_jira_setting("JIRA_EMAIL")
+                st.session_state["jira_token"] = _read_jira_setting("JIRA_API_TOKEN")
+                st.session_state["_jira_sidebar_applied"] = False
+                st.session_state.pop("_sidebar_whoami", None)
+                jira_client.clear_runtime_configuration()
+                st.rerun()
     else:
-        st.sidebar.caption("**Credentials:** from `.env` / environment")
+        if st.sidebar.button("Clear override", key="jira_btn_clear_override"):
+            st.session_state["_jira_sidebar_applied"] = False
+            st.session_state.pop("_sidebar_whoami", None)
+            jira_client.clear_runtime_configuration()
+            st.rerun()
+
+    if st.sidebar.button("Test connection", key="jira_btn_test_conn"):
+        st.session_state["_sidebar_whoami"] = jira_client.whoami()
 
     who = st.session_state.get("_sidebar_whoami")
     if who is not None:
