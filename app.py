@@ -186,8 +186,7 @@ def _connection_status_banner() -> None:
         st.warning(
             "**Not connected to JIRA yet.** "
             "Enter your site URL, email, and API token in the sidebar, then "
-            "**Apply connection** — or set `JIRA_BASE_URL`, `JIRA_EMAIL`, and "
-            "`JIRA_API_TOKEN` in `.env`.",
+            "**Apply connection**.",
             icon="⚠️",
         )
 
