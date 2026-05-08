@@ -323,7 +323,7 @@ export default function Page() {
         </div>
 
         <p className="muted" style={{ marginTop: 14, fontSize: "0.8rem" }}>
-          Request targets your JIRA REST API (same paths as the Python lab).
+          Uses your site&apos;s JIRA Cloud REST API.
         </p>
 
         <div style={{ marginTop: 18 }}>
@@ -381,7 +381,13 @@ export default function Page() {
                 </button>
               </div>
               {recordsView === "table" ? (
-                <div className="data-table-wrap">
+                <>
+                  {lastRun.record_count > 100 ? (
+                    <p className="muted" style={{ fontSize: "0.8rem", marginBottom: 8 }}>
+                      Showing the first 100 of {lastRun.record_count} records.
+                    </p>
+                  ) : null}
+                  <div className="data-table-wrap">
                   <table className="data-table">
                     <thead>
                       <tr>
@@ -403,6 +409,7 @@ export default function Page() {
                     </tbody>
                   </table>
                 </div>
+                </>
               ) : (
                 <pre
                   style={{
@@ -419,9 +426,6 @@ export default function Page() {
                   {JSON.stringify(lastRun.response.records.slice(0, 100), null, 2)}
                 </pre>
               )}
-              <p className="muted" style={{ fontSize: "0.8rem", marginTop: 8, marginBottom: 0 }}>
-                Table view flattens nested <code>fields.*</code> like the Streamlit app. Showing up to 100 rows.
-              </p>
             </div>
           ) : null}
           <details style={{ marginTop: 12 }}>
