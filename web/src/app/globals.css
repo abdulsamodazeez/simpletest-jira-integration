@@ -190,13 +190,23 @@ a:hover {
   margin-bottom: 28px;
 }
 
-.site-header .brand {
-  font-family: var(--font-sora), sans-serif;
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--text);
+.brand-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
 }
 
-.site-header .brand span {
-  color: var(--primary);
+.brand-logo {
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px var(--primary-glow);
+}
+
+.brand-title {
+  font-family: var(--font-sora), sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }

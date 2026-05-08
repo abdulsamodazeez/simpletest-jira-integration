@@ -1,6 +1,7 @@
 "use client";
 
 import { CATALOG, type CatalogObject } from "@/lib/catalog";
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 type RunResponse = {
@@ -161,12 +162,23 @@ export default function Page() {
   return (
     <div className="wrap">
       <header className="site-header">
-        <div className="brand">
-          Simple<span>Test</span> <span style={{ fontWeight: 600, color: "var(--text-sec)" }}>· JIRA lab</span>
+        <div className="brand-row">
+          <Image
+            src="/logo-resize.png"
+            alt="SimpleTest"
+            width={36}
+            height={36}
+            className="brand-logo"
+            priority
+          />
+          <div>
+            <div className="brand-title">JIRA lab</div>
+            <p className="muted" style={{ marginTop: 6, marginBottom: 0 }}>
+              Build &amp; run a live pull against JIRA Cloud — aligned with the Salesforce Data Cloud JIRA
+              connector catalog.
+            </p>
+          </div>
         </div>
-        <p className="muted" style={{ marginTop: 8 }}>
-          Build &amp; run a live pull against JIRA Cloud — aligned with the Salesforce Data Cloud JIRA connector catalog.
-        </p>
       </header>
 
       <section className="card">
