@@ -1,6 +1,7 @@
 "use client";
 
 import { CATALOG, type CatalogObject } from "@/lib/catalog";
+import { buildTableModel } from "@/lib/flattenRecords";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
@@ -62,13 +63,23 @@ export default function Page() {
   const [requiredFieldsRaw, setRequiredFieldsRaw] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [testing, setTesting] = useState(false);
+  const [connecting, setConnecting] = useState(false);
   const [lastRun, setLastRun] = useState<RunResponse | null>(null);
+  const [recordsView, setRecordsView] = useState<"table" | "json">("table");
+
+  const recordsTable = useMemo(() => {
+    if (!lastRun?.response.records?.length) return null;
+    return buildTableModel(lastRun.response.records, 100);
+  }, [lastRun]);
+
+  useEffect(() => {
+    if (lastRun) setRecordsView("table");
+  }, [lastRun]);
 
   const creds = { baseUrl: baseUrl.trim(), email: email.trim(), apiToken };
 
-  async function testConnection() {
-    setTesting(true);
+  async function connectJira() {
+    setConnecting(true);
     setTestOk(null);
     try {
       const r = await fetch("/api/jira/test", {
@@ -85,7 +96,7 @@ export default function Page() {
     } catch (e) {
       setTestOk(`Error: ${e instanceof Error ? e.message : String(e)}`);
     } finally {
-      setTesting(false);
+      setConnecting(false);
     }
   }
 
@@ -161,6 +172,7 @@ export default function Page() {
 
   return (
     <div className="wrap">
+      <div className="mast-bar" aria-hidden />
       <header className="site-header">
         <div className="brand-row">
           <Image
@@ -215,17 +227,20 @@ export default function Page() {
           </div>
         </div>
         <div style={{ marginTop: 14 }}>
-          <button type="button" className="btn btn-ghost" onClick={testConnection} disabled={testing}>
-            {testing ? "Testing…" : "Test connection"}
+          <button type="button" className="btn btn-primary" onClick={connectJira} disabled={connecting}>
+            {connecting ? "Connecting…" : "Connect"}
           </button>
+          <p className="muted" style={{ marginTop: 10, marginBottom: 0, fontSize: "0.82rem" }}>
+            Verifies your site and token with JIRA (<code>GET /rest/api/3/myself</code>), then you can run pulls below.
+          </p>
           {testOk && (
-            <span className="muted" style={{ marginLeft: 14 }}>
+            <p className="muted" style={{ marginTop: 10, marginBottom: 0 }}>
               {testOk.startsWith("Failed") || testOk.startsWith("Error") ? (
                 <span style={{ color: "var(--fail)" }}>{testOk}</span>
               ) : (
-                <span style={{ color: "var(--success)" }}>{testOk}</span>
+                <span style={{ color: "var(--success)" }}>Connected as {testOk}</span>
               )}
-            </span>
+            </p>
           )}
         </div>
       </section>
@@ -346,24 +361,68 @@ export default function Page() {
               <code>{lastRun.response.url}</code>
             </p>
           ) : null}
-          {lastRun.response.records?.length > 0 ? (
-            <details style={{ marginTop: 16 }}>
-              <summary style={{ cursor: "pointer", fontWeight: 600 }}>Records (JSON)</summary>
-              <pre
-                style={{
-                  marginTop: 12,
-                  padding: 14,
-                  background: "var(--surface-alt)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--rs)",
-                  overflow: "auto",
-                  fontSize: 12,
-                  maxHeight: 420,
-                }}
-              >
-                {JSON.stringify(lastRun.response.records.slice(0, 100), null, 2)}
-              </pre>
-            </details>
+          {lastRun.response.records?.length > 0 && recordsTable ? (
+            <div style={{ marginTop: 16 }}>
+              <p style={{ fontWeight: 600, marginBottom: 8 }}>Records</p>
+              <div className="view-toggle" role="tablist" aria-label="Record view">
+                <button
+                  type="button"
+                  className={recordsView === "table" ? "active" : ""}
+                  onClick={() => setRecordsView("table")}
+                >
+                  Table
+                </button>
+                <button
+                  type="button"
+                  className={recordsView === "json" ? "active" : ""}
+                  onClick={() => setRecordsView("json")}
+                >
+                  JSON
+                </button>
+              </div>
+              {recordsView === "table" ? (
+                <div className="data-table-wrap">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        {recordsTable.columns.map((col) => (
+                          <th key={col}>{col}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {recordsTable.rows.map((row, ri) => (
+                        <tr key={ri}>
+                          {recordsTable.columns.map((col) => (
+                            <td key={col} title={row[col] ?? ""}>
+                              {row[col] ?? ""}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <pre
+                  style={{
+                    marginTop: 8,
+                    padding: 14,
+                    background: "var(--surface-alt)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "var(--rs)",
+                    overflow: "auto",
+                    fontSize: 12,
+                    maxHeight: 420,
+                  }}
+                >
+                  {JSON.stringify(lastRun.response.records.slice(0, 100), null, 2)}
+                </pre>
+              )}
+              <p className="muted" style={{ fontSize: "0.8rem", marginTop: 8, marginBottom: 0 }}>
+                Table view flattens nested <code>fields.*</code> like the Streamlit app. Showing up to 100 rows.
+              </p>
+            </div>
           ) : null}
           <details style={{ marginTop: 12 }}>
             <summary style={{ cursor: "pointer", fontWeight: 600 }}>Raw response</summary>

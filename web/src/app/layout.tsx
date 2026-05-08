@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${sora.variable} ${jetbrains.variable}`}>{children}</body>
+      <body className={`${inter.variable} ${sora.variable} ${jetbrains.variable} app-shell`}>{children}</body>
     </html>
   );
 }
