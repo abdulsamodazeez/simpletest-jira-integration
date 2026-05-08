@@ -1,0 +1,1052 @@
+[
+  {
+    "name": "AdvancedSettings",
+    "description": "Application properties from the JIRA Advanced Settings page.",
+    "endpoint": "/application-properties",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "ApplicationRoles",
+    "description": "All application roles configured in JIRA.",
+    "endpoint": "/applicationrole",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Attachments",
+    "description": "Attachments on a single issue.",
+    "endpoint": "/issue/{issueIdOrKey}",
+    "api": "platform",
+    "response_path": "fields.attachment",
+    "notes": "Returned as the 'attachment' field of an issue payload.",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Audit",
+    "description": "Audit log records for the JIRA account.",
+    "endpoint": "/auditing/record",
+    "api": "platform",
+    "response_path": "records",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "BoardConfiguration",
+    "description": "Configuration of an Agile board.",
+    "endpoint": "/board/{boardId}/configuration",
+    "api": "agile",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "boardId",
+        "description": "Numeric board ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "BoardIssues",
+    "description": "Issues currently on an Agile board.",
+    "endpoint": "/board/{boardId}/issue",
+    "api": "agile",
+    "response_path": "issues",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "boardId",
+        "description": "Numeric board ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "BoardSprints",
+    "description": "Sprints belonging to an Agile board.",
+    "endpoint": "/board/{boardId}/sprint",
+    "api": "agile",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "boardId",
+        "description": "Numeric board ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Boards",
+    "description": "All Agile boards visible to the user.",
+    "endpoint": "/board",
+    "api": "agile",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Comments",
+    "description": "Comments on a single issue.",
+    "endpoint": "/issue/{issueIdOrKey}/comment",
+    "api": "platform",
+    "response_path": "comments",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Configuration",
+    "description": "Global JIRA configuration flags.",
+    "endpoint": "/configuration",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Dashboards",
+    "description": "Dashboards available to the current user.",
+    "endpoint": "/dashboard",
+    "api": "platform",
+    "response_path": "dashboards",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Epics",
+    "description": "Epics on an Agile board.",
+    "endpoint": "/board/{boardId}/epic",
+    "api": "agile",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "boardId",
+        "description": "Numeric board ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "FavouriteFilters",
+    "description": "Filters favourited by the current user.",
+    "endpoint": "/filter/favourite",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Fields",
+    "description": "All system and custom fields.",
+    "endpoint": "/field",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Filters",
+    "description": "Saved filters available to the current user.",
+    "endpoint": "/filter/search",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "Not available on JIRA Server.",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "FiltersUsers",
+    "description": "Users a given filter is shared with.",
+    "endpoint": "/filter/{filterId}/permission",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "filterId",
+        "description": "Numeric filter ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Groups",
+    "description": "All groups, by name.",
+    "endpoint": "/groups/picker",
+    "api": "platform",
+    "response_path": "groups",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "GroupsUsers",
+    "description": "Users in a specific group.",
+    "endpoint": "/group/member",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "groupname",
+        "description": "Group name to look up",
+        "required": true,
+        "placement": "query",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "IssueAffectedVersions",
+    "description": "Affected versions on an issue.",
+    "endpoint": "/issue/{issueIdOrKey}",
+    "api": "platform",
+    "response_path": "fields.versions",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "IssueChangelogs",
+    "description": "Changelog entries for a single issue.",
+    "endpoint": "/issue/{issueIdOrKey}/changelog",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "IssueComponents",
+    "description": "Components attached to an issue.",
+    "endpoint": "/issue/{issueIdOrKey}",
+    "api": "platform",
+    "response_path": "fields.components",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "IssueCustomFieldOptions",
+    "description": "Options for a single custom field.",
+    "endpoint": "/customField/{fieldId}/option",
+    "api": "platform",
+    "response_path": null,
+    "notes": "Not available on JIRA Server or with OAuth auth.",
+    "cloud_supported": false,
+    "params": [
+      {
+        "name": "fieldId",
+        "description": "Custom field ID (e.g. customfield_10010)",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "IssueCustomFields",
+    "description": "All custom fields (filtered subset of /field).",
+    "endpoint": "/field",
+    "api": "platform",
+    "response_path": null,
+    "notes": "Client filters to entries where 'custom' == true.",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "IssueFixVersions",
+    "description": "Fix versions on an issue.",
+    "endpoint": "/issue/{issueIdOrKey}",
+    "api": "platform",
+    "response_path": "fields.fixVersions",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "IssueLinkTypes",
+    "description": "All available issue link types.",
+    "endpoint": "/issueLinkType",
+    "api": "platform",
+    "response_path": "issueLinkTypes",
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "IssueLinks",
+    "description": "Links between issues for one issue.",
+    "endpoint": "/issue/{issueIdOrKey}",
+    "api": "platform",
+    "response_path": "fields.issuelinks",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "IssueNavigatorDefaultColumns",
+    "description": "Default columns shown in the issue navigator.",
+    "endpoint": "/settings/columns",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "IssuePriorities",
+    "description": "All issue priorities.",
+    "endpoint": "/priority",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "IssueResolutions",
+    "description": "All issue resolutions.",
+    "endpoint": "/resolution",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "IssueSecurityLevelMembers",
+    "description": "Members assigned to issue security levels.",
+    "endpoint": "/issuesecurityschemes/{schemeId}/members",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "schemeId",
+        "description": "Issue security scheme ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "IssueSubtasks",
+    "description": "Subtasks of a parent issue (queried via JQL).",
+    "endpoint": "/search/jql",
+    "api": "platform",
+    "response_path": "issues",
+    "notes": "Uses the new /search/jql endpoint (legacy /search returns HTTP 410 Gone since 2024).",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "jql",
+        "description": "JQL pre-filled to 'parent = <key>'",
+        "required": true,
+        "placement": "query",
+        "default": "parent = PROJ-1"
+      },
+      {
+        "name": "fields",
+        "description": "Comma-separated fields to include",
+        "required": false,
+        "placement": "query",
+        "default": "summary,status,issuetype,parent"
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "IssueTransitions",
+    "description": "Available workflow transitions for an issue.",
+    "endpoint": "/issue/{issueIdOrKey}/transitions",
+    "api": "platform",
+    "response_path": "transitions",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "IssueTypes",
+    "description": "All issue types.",
+    "endpoint": "/issuetype",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Issues",
+    "description": "Search issues with JQL.",
+    "endpoint": "/search/jql",
+    "api": "platform",
+    "response_path": "issues",
+    "notes": "Uses the new /search/jql endpoint (legacy /search returns HTTP 410 Gone since 2024). The new endpoint requires a bounded JQL query.",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "jql",
+        "description": "JQL query - MUST be bounded (e.g. 'project = PROJ' or 'created >= -30d'). Pure 'ORDER BY ...' queries are rejected by /search/jql with HTTP 400.",
+        "required": true,
+        "placement": "query",
+        "default": "created >= -30d ORDER BY created DESC"
+      },
+      {
+        "name": "fields",
+        "description": "Comma-separated fields to include (default returns common ones)",
+        "required": false,
+        "placement": "query",
+        "default": "summary,status,priority,issuetype,assignee,reporter,created,updated"
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "MyPermissions",
+    "description": "Permissions of the current user.",
+    "endpoint": "/mypermissions",
+    "api": "platform",
+    "response_path": "permissions",
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "PermissionGrants",
+    "description": "Permission grants for a permission scheme.",
+    "endpoint": "/permissionscheme/{schemeId}/permission",
+    "api": "platform",
+    "response_path": "permissions",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "schemeId",
+        "description": "Permission scheme ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "PermissionSchemes",
+    "description": "All permission schemes.",
+    "endpoint": "/permissionscheme",
+    "api": "platform",
+    "response_path": "permissionSchemes",
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Permissions",
+    "description": "All permission keys defined by JIRA.",
+    "endpoint": "/permissions",
+    "api": "platform",
+    "response_path": "permissions",
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "ProjectCategories",
+    "description": "All project categories.",
+    "endpoint": "/projectCategory",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "ProjectComponents",
+    "description": "Components of a single project.",
+    "endpoint": "/project/{projectIdOrKey}/components",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "projectIdOrKey",
+        "description": "Project key (e.g. PROJ) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "ProjectRoleActors",
+    "description": "Actors in a role for a project.",
+    "endpoint": "/project/{projectIdOrKey}/role/{roleId}",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "projectIdOrKey",
+        "description": "Project key (e.g. PROJ) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "roleId",
+        "description": "Role ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "ProjectRoles",
+    "description": "Roles available across projects.",
+    "endpoint": "/role",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "ProjectTypes",
+    "description": "All project types (software, business, ...).",
+    "endpoint": "/project/type",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "ProjectVersions",
+    "description": "Versions defined on a project.",
+    "endpoint": "/project/{projectIdOrKey}/versions",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "projectIdOrKey",
+        "description": "Project key (e.g. PROJ) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Projects",
+    "description": "All projects visible to the user.",
+    "endpoint": "/project/search",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "ProjectsIssueTypes",
+    "description": "Issue types per project.",
+    "endpoint": "/issuetypescheme/project",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "ProjectsPermissionScheme",
+    "description": "Permission scheme assigned to a project.",
+    "endpoint": "/project/{projectIdOrKey}/permissionscheme",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "projectIdOrKey",
+        "description": "Project key (e.g. PROJ) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "RoleActors",
+    "description": "Default actors for project roles.",
+    "endpoint": "/role/{roleId}/actors",
+    "api": "platform",
+    "response_path": "actors",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "roleId",
+        "description": "Role ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Roles",
+    "description": "All roles.",
+    "endpoint": "/role",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "SecurityLevels",
+    "description": "All issue security levels.",
+    "endpoint": "/issuesecurityschemes",
+    "api": "platform",
+    "response_path": "issueSecuritySchemes",
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "SecuritySchemes",
+    "description": "All issue security schemes.",
+    "endpoint": "/issuesecurityschemes",
+    "api": "platform",
+    "response_path": "issueSecuritySchemes",
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "SprintIssues",
+    "description": "Issues belonging to a sprint.",
+    "endpoint": "/sprint/{sprintId}/issue",
+    "api": "agile",
+    "response_path": "issues",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "sprintId",
+        "description": "Numeric sprint ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Sprints",
+    "description": "Sprints on an Agile board.",
+    "endpoint": "/board/{boardId}/sprint",
+    "api": "agile",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "boardId",
+        "description": "Numeric board ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Statuses",
+    "description": "All workflow statuses.",
+    "endpoint": "/status",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "TimeTrackingProviders",
+    "description": "Available time tracking providers.",
+    "endpoint": "/configuration/timetracking/list",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Users",
+    "description": "All users (paginated).",
+    "endpoint": "/users/search",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Votes",
+    "description": "Votes on a single issue.",
+    "endpoint": "/issue/{issueIdOrKey}/votes",
+    "api": "platform",
+    "response_path": "voters",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "Watchers",
+    "description": "Watchers of a single issue.",
+    "endpoint": "/issue/{issueIdOrKey}/watchers",
+    "api": "platform",
+    "response_path": "watchers",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      }
+    ]
+  },
+  {
+    "name": "WorkflowSchemes",
+    "description": "All workflow schemes.",
+    "endpoint": "/workflowscheme",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "WorkflowStatusCategories",
+    "description": "All status categories.",
+    "endpoint": "/statuscategory",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "WorkflowStatuses",
+    "description": "All statuses associated with workflows.",
+    "endpoint": "/status",
+    "api": "platform",
+    "response_path": null,
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Workflows",
+    "description": "All workflows.",
+    "endpoint": "/workflow/search",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "WorklogDeleted",
+    "description": "Worklogs deleted since a given timestamp.",
+    "endpoint": "/worklog/deleted",
+    "api": "platform",
+    "response_path": "values",
+    "notes": "",
+    "cloud_supported": true,
+    "params": []
+  },
+  {
+    "name": "Worklogs",
+    "description": "Worklogs on a single issue.",
+    "endpoint": "/issue/{issueIdOrKey}/worklog",
+    "api": "platform",
+    "response_path": "worklogs",
+    "notes": "",
+    "cloud_supported": true,
+    "params": [
+      {
+        "name": "issueIdOrKey",
+        "description": "Issue key (e.g. PROJ-123) or numeric ID",
+        "required": true,
+        "placement": "path",
+        "default": null
+      },
+      {
+        "name": "maxResults",
+        "description": "Page size (default 50)",
+        "required": false,
+        "placement": "query",
+        "default": "50"
+      }
+    ]
+  }
+]

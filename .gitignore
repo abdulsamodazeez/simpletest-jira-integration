@@ -6,3 +6,6 @@ __pycache__/
 .DS_Store
 .streamlit/secrets.toml
 *.log
+web/node_modules/
+web/.next/
+
