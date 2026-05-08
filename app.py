@@ -51,12 +51,47 @@ st.set_page_config(
     },
 )
 
-# Hide bottom-right Streamlit deploy/branding strip (`data-testid="stDecoration"`).
-# Must run early; harmless if the DOM changes in a future Streamlit release.
-st.markdown(
-    "<style>[data-testid=\"stDecoration\"] { display: none !important; }</style>",
-    unsafe_allow_html=True,
-)
+# Strip built-in Streamlit chrome (deploy chip, footer branding). Selectors vary by
+# Streamlit version; we apply a broad rule set. Re-injected at end of `main()` so
+# it wins over Streamlit's own styles on Community Cloud.
+_HIDE_STREAMLIT_CHROME_CSS = """
+<style>
+    /* Bottom-right deploy / branding cluster */
+    [data-testid="stDecoration"],
+    div[data-testid="stDecoration"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+    }
+    /* Hide common deploy-button implementations */
+    [data-testid="stDeployButton"],
+    .stAppDeployButton,
+    .stDeployButton,
+    /* Wrapper that keeps empty space when decoration is hidden */
+    div:has(> [data-testid="stDecoration"]) {
+        display: none !important;
+    }
+    /* Footer / "Made with Streamlit" bar */
+    [data-testid="stFooter"],
+    footer[data-testid="stFooter"] {
+        visibility: hidden !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+</style>
+"""
+
+
+def _inject_hide_streamlit_chrome() -> None:
+    st.markdown(_HIDE_STREAMLIT_CHROME_CSS, unsafe_allow_html=True)
+
+
+_inject_hide_streamlit_chrome()
 
 
 def _read_jira_setting(name: str) -> str:
@@ -405,6 +440,8 @@ def main() -> None:
     with tab_lib:
         with st.container(border=True):
             render_library_tab()
+
+    _inject_hide_streamlit_chrome()
 
 
 if __name__ == "__main__":
