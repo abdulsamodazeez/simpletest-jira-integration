@@ -1,0 +1,4 @@
+# Deployed app: reduce default header chrome (Streamlit menu / dev options).
+# Bottom-right "deploy" / branding is hidden in app.py via CSS on stDecoration.
+[client]
+toolbarMode = "minimal"

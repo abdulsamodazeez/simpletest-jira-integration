@@ -44,6 +44,18 @@ st.set_page_config(
     page_icon="🔍",
     layout="wide",
     initial_sidebar_state="expanded",
+    menu_items={
+        "Get help": None,
+        "Report a bug": None,
+        "About": None,
+    },
+)
+
+# Hide bottom-right Streamlit deploy/branding strip (`data-testid="stDecoration"`).
+# Must run early; harmless if the DOM changes in a future Streamlit release.
+st.markdown(
+    "<style>[data-testid=\"stDecoration\"] { display: none !important; }</style>",
+    unsafe_allow_html=True,
 )
 
 
